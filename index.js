@@ -114,3 +114,117 @@ function gameObject() {
         },
     };
 }
+
+function numPointsScored(playerName) {
+    const game = gameObject();
+
+    for (let team in game) {
+        const players = game[team].players;
+
+        for (let name in players) {
+            if (name === playerName) {
+                return players[name].points;
+            }
+        }
+    }
+}
+
+function shoeSize(playerName) {
+    const game = gameObject();
+
+    for (let team in game) {
+        const players = game[team].players;
+
+        for (let name in players) {
+            if (name === playerName) {
+                return players[name].shoe;
+            }
+        }
+    }
+}
+
+function teamColors(teamName) {
+    const game = gameObject();
+
+    for (let team in game) {
+        const currentTeam = game[team];
+        if (currentTeam.teamName === teamName) {
+            return currentTeam.colors;
+        }
+    }
+}
+
+function teamNames() {
+    const game = gameObject();
+    const names = [];
+
+    for (let team in game) {
+        names.push(game[team].teamName);
+    }
+
+    return names;
+}
+
+function playerNumbers(teamName) {
+    const game = gameObject();
+
+    for (let team in game) {
+        const currentTeam = game[team];
+
+        if(currentTeam.teamName === teamName) {
+            playerNumbers = [];
+
+            for(let player in currentTeam.players) {
+                playerNumbers.push(currentTeam.players[player].number);
+            }
+
+            return playerNumbers;
+        }
+    }
+}
+
+function playerStats(playerName) {
+    const game = gameObject();
+
+    for (let team in game) {
+        const players = game[team].players;
+
+        for (let name in players) {
+            if (name === playerName) {
+                return players[name];
+            }
+        }
+    }
+}
+
+function bigShoeRebounds() {
+    const game = gameObject();
+
+    let biggestShoeSize = 0;
+    let reboundsOfBiggest = 0;
+
+    for (let team in game) {
+        const players = game[team].players;
+
+        for (let player in players) {
+            const stats = players[player];
+
+            if (stats.shoe > biggestShoeSize) {
+                biggestShoeSize = stats.shoe;
+                reboundsOfBiggest = stats.rebounds;
+            }
+        }
+    }
+    return reboundsOfBiggest;
+}   
+
+module.exports = {
+    numPointsScored,
+    shoeSize,
+    teamColors,
+    teamNames,
+    playerNumbers,
+    playerStats,
+    bigShoeRebounds
+
+};
